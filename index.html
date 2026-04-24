@@ -454,15 +454,31 @@
         </div>
     </div>
 
-    <div class="footer-note">
-        <h3>💡 実務での選定ステップ</h3>
+  <div class="footer-note">
+        <h3>💡 実務での選定ステップ（具体例：基板のチップ検査）</h3>
         <div class="step-box">
-            <div class="step">1. WDと画角（視野範囲）を決定</div>
-            <div class="step">2. 必要な焦点距離(f)を逆算</div>
-            <div class="step">3. 明るさと被写界深度(F値)を最適化</div>
+            <div class="step">
+                <strong>1. 条件決定</strong><br>
+                WD: <b>200mm</b> の高さから<br>
+                視野: <b>50mm × 40mm</b> を見たい
+            </div>
+            <div class="step">
+                <strong>2. 焦点距離の計算</strong><br>
+                1/2型センサーの場合：<br>
+                f = (センサーサイズ 6.4mm / 視野 50mm) × WD 200mm<br>
+                → <b>25.6mm</b> (近似の <b>25mmレンズ</b> を選択)
+            </div>
+            <div class="step">
+                <strong>3. 絞り・F値の調整</strong><br>
+                基板の凹凸(3mm)にピントを合わせたい<br>
+                → F値を <b>F5.6</b> まで絞って深度を稼ぐ<br>
+                → 暗くなる分を <b>外部照明</b> でカバー
+            </div>
         </div>
+        <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.8; text-align: center;">
+            ※計算式：f = (Sensor Size / FOV) × WD
+        </p>
     </div>
-</div>
 
 </body>
 </html>

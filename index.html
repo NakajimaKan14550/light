@@ -34,16 +34,19 @@
                 </div>
             </div>
 
-            <div style="flex: 1; min-width: 350px;">
-                <div style="background: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
-                    <img src="refraction.png" alt="光の屈折とレンズ形状の原理" style="width: 100%; height: auto; border-radius: 10px;">
-                    <div style="margin-top: 15px; display: flex; justify-content: space-around; font-size: 14px; color: #64748b; font-weight: bold;">
-                        <span>[ 平面：直進 ]</span>
-                        <span>[ 曲面：屈折・収束 ]</span>
-                    </div>
-                </div>
-            </div>
+           <div style="background: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+    <div class="zoomable-image-container" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 10px;" onclick="openModal('refraction.png')">
+        <img src="refraction.png" alt="光の屈折とレンズ形状の原理" class="zoomable-image" style="width: 100%; height: auto; display: block; transition: transform 0.3s ease;">
+        <div class="zoom-icon" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); color: #fff; padding: 5px; border-radius: 50%; opacity: 0; transition: opacity 0.3s ease;">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
         </div>
+    </div>
+    <div style="margin-top: 15px; display: flex; justify-content: space-around; font-size: 14px; color: #64748b; font-weight: bold;">
+        <span>[ 平面：直進 ]</span>
+        <span>[ 曲面：屈折・収束 ]</span>
+    </div>
+</div>
+      
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 50px;">
             <div style="padding: 25px; background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; text-align: center;">

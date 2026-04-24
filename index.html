@@ -61,3 +61,84 @@
         </div>
     </div>
 </section>
+
+
+<section style="padding: 100px 20px; background: var(--bg-light); font-family: 'Noto Sans JP', sans-serif;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        
+        <div style="margin-bottom: 60px;">
+            <h2 style="color: var(--primary-green); border-left: 8px solid var(--accent-gold); padding-left: 20px; font-size: 32px; font-weight: 700; letter-spacing: 0.05em;">
+                レンズの主な役割
+            </h2>
+        </div>
+
+        <div style="
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 50px; 
+            border-radius: 30px; 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at center, rgba(13, 77, 77, 0.1) 0%, rgba(7, 43, 43, 0.1) 70%, transparent 100%),
+                linear-gradient(135deg, #0d4d4d 0%, #073838 100%);
+        ">
+            <div style="flex: 0 0 100%; text-align: left; margin-bottom: 40px;">
+                <p style="color: #ffffff; font-size: 18px; line-height: 1.8; opacity: 0.9;">
+                    レンズの役割は、光の進む方向を自在に操り、目的の形に整えることです。主に<strong>「集光（光を集める）」</strong>、<strong>「結像（像を作る）」</strong>の2点に集約されます。
+                </p>
+            </div>
+
+            <div style="flex: 0 0 100%; text-align: center;">
+                <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); border: 1px solid rgba(212, 175, 55, 0.2); cursor: pointer;" onclick="openModal('correct.png')">
+                    <img src="correct.png" alt="レンズの主な役割：集光と結像の原理" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <p style="text-align: center; font-size: 14px; color: rgba(255, 255, 255, 0.7); margin-top: 15px; font-weight: bold;">
+                        図：光を集める「集光」と、像を再現する「結像」の原理 (クリックで拡大)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div style="
+            background: #fff; 
+            color: #1e293b;
+            padding: 50px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            margin-top: 60px;
+            border: 1px solid #e2e8f0;
+        ">
+            <h3 style="color: #0d4d4d; font-size: 26px; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">
+                【重要】なぜ、液体レンズなのか？
+            </h3>
+            <p style="font-size: 17px; line-height: 1.8; text-align: left; max-width: 900px; margin: 0 auto;">
+                従来のガラスレンズは、これらの役割を果たすために「レンズそのものを物理的に動かす（モーター駆動）」必要がありました。液体レンズは、レンズ内の**液体の形状自体を変える**ことで、これらすべての役割を<strong>「静止したまま・電気の速さで」</strong>完結させます。
+            </p>
+            <ul style="color: #4a5568; list-style-type: none; padding: 0; margin-top: 30px; display: flex; justify-content: center; gap: 30px;">
+                <li><i class="fa-solid fa-bolt" style="color:#d4af37;"></i> 超高速：ms単位</li>
+                <li><i class="fa-solid fa-layer-group" style="color:#0d4d4d;"></i> 空間スキャン思想</li>
+                <li><i class="fa-solid fa-wrench" style="color:#d4af37;"></i> メンテナンスフリー</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div id="imageModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;" onclick="closeModal()">
+    <img id="modalImage" style="max-width: 90%; max-height: 90%; margin: auto; display: block; border-radius: 10px; box-shadow: 0 0 50px rgba(255,255,255,0.2);">
+</div>
+
+<script>
+function openModal(imgSrc) {
+    document.getElementById('modalImage').src = imgSrc;
+    document.getElementById('imageModal').style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById('imageModal').style.display = "none";
+}
+</script>

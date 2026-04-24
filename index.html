@@ -266,5 +266,300 @@
     </div>
 </section>
 
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import numpy as np
 
+# Set up the figure and axes
+# Use a very large figure size for high resolution and size
+fig = plt.figure(figsize=(36, 24), dpi=100)
+ax = fig.add_axes([0, 0, 1, 1], frameon=False)
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+ax.axis('off')
+
+# Set background to a cool blueprint grid
+x_grid = np.linspace(0, 1, 50)
+y_grid = np.linspace(0, 1, 50)
+X, Y = np.meshgrid(x_grid, y_grid)
+ax.scatter(X, Y, s=2, color='#285078', alpha=0.1)
+
+# Function to wrap text
+def wrap_text(text, width=30):
+    import textwrap
+    return '\n'.join(textwrap.wrap(text, width=width))
+
+# --- Main Title ---
+ax.text(0.5, 0.96, "レンズ選定の基礎：四大要素解説", fontsize=50, ha='center', fontweight='bold', color='black',
+        bbox=dict(facecolor='white', edgecolor='none', boxstyle='round,pad=0.2', alpha=0.8))
+
+# --- Panels Setup ---
+num_panels = 4
+panel_width = 1 / num_panels
+for i in range(1, num_panels):
+    x_pos = i * panel_width
+    ax.axvline(x=x_pos, color='#333333', linewidth=2)
+
+panel_y_start = 0.90
+panel_y_end = 0.15
+panel_content_height = panel_y_start - panel_y_end
+
+# Content common definitions
+label_fontsize = 28
+value_fontsize = 24
+desc_fontsize = 20
+
+# === 1. 焦点距離 (Focal Length) ===
+p1_x = 0
+# Title
+ax.text(p1_x + 0.03, 0.86, wrap_text("1. 焦点距離\n(Focal Length)"), fontsize=32, ha='left', fontweight='bold',
+        bbox=dict(facecolor='none', edgecolor='black', boxstyle='round,pad=0.2'))
+# Icon
+icon_box1 = patches.FancyBboxPatch((p1_x + 0.16, 0.85), 0.06, 0.04, boxstyle="round,pad=0.01", ec="black", fc="#CDEFFF")
+ax.add_patch(icon_box1)
+ax.text(p1_x + 0.19, 0.87, "Wide/Tele", fontsize=18, ha='center', color='black')
+
+# Visualization: Wide & Tele
+def plot_focal_length_rays(x, y_start, h, label_top, label_bottom, short_f=True):
+    y_mid = y_start + h/2
+    y_r = h/2.5
+    y_f = h/10
+    # Wide
+    ax.text(x+0.05, y_start+h-0.02, "短い f", fontsize=value_fontsize, ha='center', fontweight='bold')
+    w_points = np.array([[x+0.05, y_mid], [x+0.1, y_start+y_r], [x+0.1, y_start+h-y_r], [x+0.05, y_mid]])
+    w_rays = patches.Polygon(w_points, closed=True, facecolor='#66C2E0', edgecolor='none', alpha=0.7)
+    ax.add_patch(w_rays)
+    ax.plot([x+0.05, x+0.1], [y_mid, y_mid], color='black', linewidth=1) # Ray line
+
+    # Tele
+    ax.text(x+0.05, y_start+0.02, "長い f", fontsize=value_fontsize, ha='center', fontweight='bold')
+    t_points = np.array([[x+0.05, y_mid], [x+0.1, y_start+y_f], [x+0.1, y_start+h-y_f], [x+0.05, y_mid]])
+    t_rays = patches.Polygon(t_points, closed=True, facecolor='#66C2E0', edgecolor='none', alpha=0.7)
+    ax.add_patch(t_rays)
+    ax.plot([x+0.05, x+0.1], [y_mid, y_mid], color='black', linewidth=1) # Ray line
+
+    # Main label (horizontal flow)
+    h_y = y_start + h/2
+    ax.axhline(y=h_y, xmin=x, xmax=x+0.11, color='black', linewidth=1.5)
+    ax.text(x+0.12, h_y+0.02, label_top, fontsize=label_fontsize, ha='center')
+    ax.text(x+0.12, h_y-0.03, label_bottom, fontsize=label_fontsize, ha='center')
+
+plot_focal_length_rays(p1_x, 0.45, 0.35, "画角/倍率を決定", "f = 主点から焦点までの距離")
+
+# Central Illustration: Lens flow and camera
+# Lens with labels
+l_x = p1_x + 0.05
+l_y = 0.28
+l_h = 0.12
+l_w = 0.16
+l_cyl = patches.Ellipse((l_x + l_w/2, l_y), l_w, l_h, angle=0, fc="#CCCCCC", ec="black")
+ax.add_patch(l_cyl)
+l_front = patches.Ellipse((l_x, l_y), l_w/5, l_h, angle=0, fc="#999999", ec="black")
+ax.add_patch(l_front)
+ax.plot([l_x, l_x+l_w], [l_y+l_h/2, l_y+l_h/2], color='black', linewidth=1) # Center line
+# Label 'f'
+ax.text(l_x+l_w/2, l_y-0.03, "f", fontsize=30, ha='center', fontweight='bold')
+ax.plot([l_x+l_w/2, l_x+l_w/2], [l_y-0.01, l_y-0.02], color='black', linewidth=2)
+# Camera
+c_x = p1_x + 0.16
+c_y = 0.25
+c_h = 0.18
+c_w = 0.12
+cam_rect = patches.Rectangle((c_x, c_y), c_w, c_h, fc="#222222", ec="black", angle=20)
+ax.add_patch(cam_rect)
+# Text for camera
+ax.text(c_x+0.04, c_y+0.06, "f = 焦点距離\n(決定)", fontsize=20, ha='center', color='white', fontweight='bold', angle=20)
+
+# Arrows and labels connecting ideas
+arrow1 = patches.FancyArrowPatch((p1_x + 0.11, 0.65), (p1_x + 0.15, 0.65), arrowstyle='simple', mutation_scale=20, color='black')
+ax.add_patch(arrow1)
+ax.text(p1_x + 0.13, 0.63, "カメラ\nへ", fontsize=20, ha='center')
+
+# === 2. F値 (F-number) ===
+p2_x = 0.25
+# Title
+ax.text(p2_x + 0.03, 0.86, wrap_text("2. F値\n(F-number)"), fontsize=32, ha='left', fontweight='bold',
+        bbox=dict(facecolor='none', edgecolor='black', boxstyle='round,pad=0.2'))
+# Icon
+icon_box2 = patches.FancyBboxPatch((p2_x + 0.16, 0.85), 0.06, 0.04, boxstyle="round,pad=0.01", ec="black", fc="#CDEFFF")
+ax.add_patch(icon_box2)
+ax.text(p2_x + 0.19, 0.87, "Iris Ring", fontsize=18, ha='center', color='black')
+
+# Visualization: Wide & Narrow Aperture
+ap_r_open = 0.04
+ap_r_closed = 0.01
+ap_y = 0.48
+ap_x_open = p2_x + 0.06
+ap_x_closed = p2_x + 0.19
+# Open
+ap_open = patches.Circle((ap_x_open, ap_y), ap_r_open, fc="#FFD700", ec="black", alpha=0.7)
+ax.add_patch(ap_open)
+ax.text(ap_x_open, ap_y-0.08, wrap_text("F値：小 (明るい)\n被写界深度：小さい\n(浅いぼけ背景効果)"), fontsize=desc_fontsize, ha='center')
+# Closed
+ap_closed = patches.Circle((ap_x_closed, ap_y), ap_r_closed, fc="#66C2E0", ec="black", alpha=0.7)
+ax.add_patch(ap_closed)
+ax.text(ap_x_closed, ap_y-0.08, wrap_text("F値：大 (暗い)\n被写界深度：大きい\n(前面と後後も鮮明)"), fontsize=desc_fontsize, ha='center')
+# Common label
+ax.text(p2_x + 0.125, ap_y+0.08, wrap_text("明るさと被写界深度の制御"), fontsize=label_fontsize, ha='center', fontweight='bold')
+
+# Formula section
+form_y = 0.35
+form_x = p2_x + 0.125
+ax.text(form_x, form_y+0.05, "F = f / D", fontsize=40, ha='center', fontweight='bold')
+ax.text(form_x, form_y-0.03, wrap_text("f: 焦点距離\nD: 有効口径"), fontsize=value_fontsize, ha='center')
+
+# Arrows linking to aperture diagrams
+arrow2a = patches.FancyArrowPatch((p2_x+0.125, 0.70), (ap_x_open, ap_y+ap_r_open+0.01), arrowstyle='simple', mutation_scale=20, color='black')
+ax.add_patch(arrow2a)
+arrow2b = patches.FancyArrowPatch((p2_x+0.125, 0.70), (ap_x_closed, ap_y+ap_r_closed+0.01), arrowstyle='simple', mutation_scale=20, color='black')
+ax.add_patch(arrow2b)
+
+# Connecting arrow to the lens diagram
+arrow2_lens = patches.FancyArrowPatch((p2_x + 0.11, 0.60), (p1_x + 0.23, 0.35), arrowstyle='simple', mutation_scale=20, color='#333333', alpha=0.5)
+ax.add_patch(arrow2_lens)
+
+# === 3. 絞り (Aperture / Iris) ===
+p3_x = 0.50
+# Title
+ax.text(p3_x + 0.03, 0.86, wrap_text("3. 絞り\n(Aperture / Iris)"), fontsize=32, ha='left', fontweight='bold',
+        bbox=dict(facecolor='none', edgecolor='black', boxstyle='round,pad=0.2'))
+# Icon
+icon_box3 = patches.FancyBboxPatch((p3_x + 0.16, 0.85), 0.06, 0.04, boxstyle="round,pad=0.01", ec="black", fc="#CDEFFF")
+ax.add_patch(icon_box3)
+ax.text(p3_x + 0.19, 0.87, "Diaphragm", fontsize=18, ha='center', color='black')
+
+# Physical Mechanism Visualization
+iris_y = 0.65
+iris_x = p3_x + 0.125
+iris_cyl = patches.Ellipse((iris_x, iris_y), 0.16, 0.12, angle=0, fc="#BBBBBB", ec="black")
+ax.add_patch(iris_cyl)
+iris_front = patches.Ellipse((iris_x - 0.06, iris_y), 0.03, 0.12, angle=0, fc="#999999", ec="black")
+ax.add_patch(iris_front)
+# Show 'Open' vs 'Closed' positions with ray diagrams
+open_r = 0.02
+closed_r = 0.005
+w_rays_open = patches.Polygon([[iris_x-0.06, iris_y], [iris_x-0.03, iris_y+open_r], [iris_x-0.03, iris_y-open_r]], closed=True, fc='#FFD700', alpha=0.5)
+ax.add_patch(w_rays_open)
+w_rays_closed = patches.Polygon([[iris_x+0.02, iris_y], [iris_x+0.05, iris_y+closed_r], [iris_x+0.05, iris_y-closed_r]], closed=True, fc='#66C2E0', alpha=0.5)
+ax.add_patch(w_rays_closed)
+ax.text(iris_x-0.03, iris_y-0.08, "絞り開放", fontsize=value_fontsize, ha='center', fontweight='bold')
+ax.text(iris_x+0.05, iris_y-0.08, "絞り込む", fontsize=value_fontsize, ha='center', fontweight='bold')
+
+# Main descriptive labels
+ax.text(p3_x + 0.125, 0.50, wrap_text("光量を物理的に制限"), fontsize=label_fontsize, ha='center', fontweight='bold')
+ax.text(p3_x + 0.125, 0.44, wrap_text("F値との関係"), fontsize=24, ha='center')
+
+# Arrows indicating flow
+arrow3a = patches.FancyArrowPatch((p3_x+0.125, 0.76), (p3_x+0.125, 0.71), arrowstyle='simple', mutation_scale=20, color='black')
+ax.add_patch(arrow3a)
+arrow3b = patches.FancyArrowPatch((p3_x+0.125, 0.54), (p3_x+0.125, 0.49), arrowstyle='simple', mutation_scale=20, color='black')
+ax.add_patch(arrow3b)
+
+# Special warning note
+warning_box = patches.FancyBboxPatch((p3_x + 0.06, 0.36), 0.13, 0.06, boxstyle="round,pad=0.01", ec="black", fc="#FFEEDD")
+ax.add_patch(warning_box)
+ax.text(p3_x + 0.125, 0.39, "⚠ 回折現象に注意", fontsize=22, ha='center', fontweight='bold', color='#D9534F')
+ax.text(p3_x + 0.125, 0.37, "(絞りすぎると解像力低下)", fontsize=18, ha='center')
+
+# === 4. WD (Working Distance / 作動距離) ===
+p4_x = 0.75
+# Title
+ax.text(p4_x + 0.03, 0.86, wrap_text("4. WD\n(Working Distance / 作動距離)"), fontsize=32, ha='left', fontweight='bold',
+        bbox=dict(facecolor='none', edgecolor='black', boxstyle='round,pad=0.2'))
+# Icon
+icon_box4 = patches.FancyBboxPatch((p4_x + 0.16, 0.85), 0.06, 0.04, boxstyle="round,pad=0.01", ec="black", fc="#CDEFFF")
+ax.add_patch(icon_box4)
+ax.text(p4_x + 0.19, 0.87, "Ruler", fontsize=18, ha='center', color='black')
+
+# Setup visualization: Camera, Lens, Object
+# Stand
+s_h = 0.45
+s_w = 0.02
+s_x = p4_x + 0.02
+s_y = 0.28
+stand_rect = patches.Rectangle((s_x, s_y), s_w, s_h, fc="#666666", ec="black")
+ax.add_patch(stand_rect)
+# Camera & Lens on stand
+c2_x = s_x + 0.01
+c2_y = s_y + 0.2
+cam2_rect = patches.Rectangle((c2_x, c2_y), c_w, c_h, fc="#222222", ec="black")
+ax.add_patch(cam2_rect)
+l2_x = c2_x + c_w
+l2_y = c2_y + 0.03
+l2_cyl = patches.Ellipse((l2_x + l_w/2, l2_y), l_w, l_h, angle=0, fc="#CCCCCC", ec="black")
+ax.add_patch(l2_cyl)
+l2_front = patches.Ellipse((l2_x, l2_y), l_w/5, l_h, angle=0, fc="#999999", ec="black")
+ax.add_patch(l2_front)
+# Target Object
+o_x = s_x + c_w + l_w + 0.04
+o_y = s_y + 0.05
+obj_rect = patches.Rectangle((o_x, o_y), 0.1, 0.1, fc="#AA66CC", ec="black")
+ax.add_patch(obj_rect)
+ax.text(o_x+0.05, o_y+0.05, "対象物\n(ワーク)", fontsize=22, ha='center', color='white', fontweight='bold')
+
+# Measure line and labels
+measure_x_start = l2_x + 0.02
+measure_x_end = o_x - 0.01
+measure_y = c2_y + c_h + 0.02
+ax.axhline(y=measure_y, xmin=measure_x_start, xmax=measure_x_end, color='black', linewidth=1)
+ax.plot([measure_x_start, measure_x_start], [measure_y-0.01, measure_y+0.01], color='black', linewidth=2)
+ax.plot([measure_x_end, measure_x_end], [measure_y-0.01, measure_y+0.01], color='black', linewidth=2)
+# Text 'WD' and definition
+ax.text((measure_x_start+measure_x_end)/2, measure_y+0.02, "WD", fontsize=36, ha='center', fontweight='bold')
+ax.plot([(measure_x_start+measure_x_end)/2, (measure_x_start+measure_x_end)/2], [measure_y+0.01, measure_y+0.02], color='black', linewidth=1) # Leader line
+
+ax.text(measure_x_start, measure_y-0.04, "レンズ先端", fontsize=20, ha='left')
+ax.text(measure_x_end, measure_y-0.04, wrap_text("レンズとワーク間の距離"), fontsize=label_fontsize, ha='right', fontweight='bold')
+
+# Lower vertical descriptive labels
+ax.text(p4_x + 0.125, 0.20, wrap_text("設置スペース、照明配置の鍵"), fontsize=label_fontsize, ha='center', fontweight='bold')
+
+# Arrows connecting ideas
+arrow4 = patches.FancyArrowPatch((p4_x+0.125, 0.70), (p4_x+0.125, 0.65), arrowstyle='simple', mutation_scale=20, color='black')
+ax.add_patch(arrow4)
+
+# === Footer: Correlation & Steps ===
+footer_y = 0.10
+ax.axhline(y=footer_y+0.01, color='#666666', linewidth=2)
+
+# --- Correlation Bar ---
+ax.text(0.5, footer_y+0.05, "要素間の相関関係", fontsize=36, ha='center', fontweight='bold',
+        bbox=dict(facecolor='#EEF5FF', edgecolor='none', boxstyle='round,pad=0.2', alpha=0.9))
+# Icons on the bar
+p1_bar_x = panel_width * 0.5
+p2_bar_x = panel_width * 1.5
+p3_bar_x = panel_width * 2.5
+p4_bar_x = panel_width * 3.5
+
+def plot_bar_icon(x, y, text_label):
+    icon_box = patches.FancyBboxPatch((x-0.025, y-0.01), 0.05, 0.02, boxstyle="round,pad=0.005", ec="black", fc="#CDEFFF")
+    ax.add_patch(icon_box)
+    ax.text(x, y, text_label, fontsize=20, ha='center')
+
+plot_bar_icon(p1_bar_x, footer_y+0.03, "焦点距離")
+plot_bar_icon(p2_bar_x, footer_y+0.03, "F値")
+plot_bar_icon(p3_bar_x, footer_y+0.03, "絞り")
+plot_bar_icon(p4_bar_x, footer_y+0.03, "WD")
+
+# Correlation Text labels
+corr_fontsize = 24
+ax.text((p1_bar_x+p2_bar_x)/2, footer_y+0.00, wrap_text("WDを短く → 倍率アップ / 被写界深度浅"), fontsize=corr_fontsize, ha='center')
+ax.text((p2_bar_x+p3_bar_x)/2, footer_y+0.00, wrap_text("WDを画角と短 → 倍率アップ → F値率逆算"), fontsize=corr_fontsize, ha='center')
+
+# Horizontal arrows on correlation bar
+ax.plot([p1_bar_x, p2_bar_x-0.03], [footer_y+0.01, footer_y+0.01], color='#333333', linewidth=1)
+ax.plot([p2_bar_x+0.03, p3_bar_x], [footer_y+0.01, footer_y+0.01], color='#333333', linewidth=1)
+ax.plot([p1_bar_x, p1_bar_x], [footer_y, footer_y+0.02], color='#333333', linewidth=1) # Tick marks
+ax.plot([p2_bar_x, p2_bar_x], [footer_y, footer_y+0.02], color='#333333', linewidth=1)
+ax.plot([p3_bar_x, p3_bar_x], [footer_y, footer_y+0.02], color='#333333', linewidth=1)
+ax.plot([p4_bar_x, p4_bar_x], [footer_y, footer_y+0.02], color='#333333', linewidth=1)
+
+# --- Selection Steps ---
+steps_y = 0.03
+ax.text(0.5, steps_y, "カメラ選定のステップ:", fontsize=36, ha='center', fontweight='bold')
+ax.text(0.5, steps_y-0.02, "1. WD・画角決定 → 2. 焦点距離逆算 → 3. F値・照明最適化", fontsize=30, ha='center', color='#333333')
+
+# Final check: Save the plot to focus.png with very high DPI for large file
+plt.savefig('focus.png', format='png', dpi=100) # dpi=100 with 36x24 inches is very large, could go even higher for extreme resolution.
+plt.close()
 

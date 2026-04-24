@@ -489,76 +489,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flange Back Guide</title>
+    <title>光学技術解説：レンズ選定とマウント規格</title>
     <style>
-        .flange-box {
-            max-width: 500px;
-            font-family: sans-serif;
-            border: 2px solid #2c3e50;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #fff;
+        :root {
+            --primary-dark: #2c3e50;
+            --accent-blue: #3498db;
+            --accent-orange: #e67e22;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --border-color: #dcdde1;
         }
-        .flange-header {
-            background: #2c3e50;
-            color: white;
-            padding: 12px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .flange-body {
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--primary-dark);
+            margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
-        .spec-table {
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+
+        h1 { margin: 0; font-size: 2rem; }
+
+        /* メインビジュアル（生成画像） */
+        .main-visual {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .main-visual img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* 詳細解説セクション */
+        .detail-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--accent-blue);
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            color: var(--primary-dark);
+        }
+
+        .table-standard {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 15px;
+            margin-top: 10px;
         }
-        .spec-table td {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .spec-table tr:last-child td { border-bottom: none; }
-        .val { font-family: 'Courier New', monospace; font-weight: bold; color: #e67e22; text-align: right; }
-        
-        .alert-ring {
-            background: #fff3cd;
-            border: 1px solid #ffeeba;
-            padding: 10px;
-            border-radius: 4px;
+
+        .table-standard th, .table-standard td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid var(--border-color);
             font-size: 0.9rem;
-            color: #856404;
         }
-        .alert-ring strong { color: #d9534f; }
+
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .step-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .step-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 250px;
+        }
     </style>
 </head>
 <body>
 
-<div class="flange-box">
-    <div class="flange-header">フランジバック規格 (主要マウント)</div>
-    <div class="flange-body">
-        <table class="spec-table">
-            <tr>
-                <td>Cマウント</td>
-                <td class="val">17.526 mm</td>
-            </tr>
-            <tr>
-                <td>CSマウント</td>
-                <td class="val">12.526 mm</td>
-            </tr>
-            <tr>
-                <td>Sony Eマウント</td>
-                <td class="val">18.000 mm</td>
-            </tr>
-            <tr>
-                <td>Nikon Fマウント</td>
-                <td class="val">46.500 mm</td>
-            </tr>
-        </table>
+<div class="container">
+    <header>
+        <h1>光学技術ダッシュボード：レンズ選定とマウント</h1>
+        <p>設計精度を高めるフランジバックの理解と実務フロー</p>
+    </header>
 
-        <div class="alert-ring">
-            <strong>【変換時の鉄則】</strong><br>
-            CSマウントカメラにCマウントレンズを装着する場合、<strong>5mmの接写リング</strong>を挟むことでピントを正常化できます。
+    <div class="main-visual">
+        <img src="flange.png" alt="レンズ選定の四大要素とフランジバック解説図">
+        <p style="color: #666; font-size: 0.85rem; margin-top: 10px;">※ 生成した focus.png をこの HTML と同じフォルダに保存してください。</p>
+    </div>
+
+    <div class="detail-section">
+        <div class="card" style="border-top-color: var(--accent-orange);">
+            <h2>1. フランジバックの基礎知識</h2>
+            <p>マウント面からセンサーまでの固定距離。0.01mmの精度が無限遠ピントに影響します。</p>
+            <table class="table-standard">
+                <tr><th>規格</th><th>距離 (mm)</th></tr>
+                <tr><td>Cマウント</td><td>17.526</td></tr>
+                <tr><td>CSマウント</td><td>12.526</td></tr>
+                <tr><td>Sony E</td><td>18.000</td></tr>
+                <tr><td>Nikon F</td><td>46.500</td></tr>
+            </table>
+            <div class="highlight-box">
+                <strong>💡 実務の鉄則：</strong><br>
+                CSカメラにCレンズを付ける際は <b>5mm接写リング</b> が必須です。
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>2. バックフォーカスとの違い</h2>
+            <p>混同されやすいですが、以下の違いを区別することが設計ミスを防ぎます。</p>
+            <ul style="font-size: 0.95rem;">
+                <li><strong>フランジバック：</strong> カメラ側の「固定値」。規格で決まっている。</li>
+                <li><strong>バックフォーカス：</strong> レンズ最後尾ガラスからの「可変値」。設計で変わる。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <h2 style="margin-top: 0;">🛠 選定・導入プロセス</h2>
+        <div class="step-list">
+            <div class="step-item">
+                <strong>STEP 1: 要件定義</strong><br>
+                WD（設置距離）と画角（視野）を決定し、現場のスペースを確保する。
+            </div>
+            <div class="step-item">
+                <strong>STEP 2: 光学逆算</strong><br>
+                センサーサイズと画角から焦点距離(f)を計算し、レンズを選定する。
+            </div>
+            <div class="step-item">
+                <strong>STEP 3: 最終調整</strong><br>
+                F値（絞り）で明るさと深度を最適化。マウント規格の不一致があればスペーサーで補正。
+            </div>
         </div>
     </div>
 </div>

@@ -271,144 +271,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lens Basics - Focus Dashboard</title>
+    <title>レンズ選定の基礎：四大要素解説</title>
     <style>
         :root {
-            --bg-color: #f0f2f5;
-            --panel-bg: #ffffff;
-            --accent-blue: #3498db;
-            --text-main: #2c3e50;
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e67e22;
+            --bg: #f4f7f6;
+            --white: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Meiryo, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            line-height: 1.6;
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        .dashboard-container {
-            max-width: 1400px;
-            width: 100%;
-            background: var(--panel-bg);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         header {
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: var(--text-main);
-        }
-
-        /* 画像エリア：大きく表示 */
-        .image-viewer {
-            width: 100%;
+        /* 画像エリアのスタイル */
+        .image-container {
             text-align: center;
-            margin: 20px 0;
-            background: #fdfdfd;
-            border: 1px solid #ddd;
+            margin-bottom: 40px;
+            background: var(--white);
+            padding: 20px;
             border-radius: 12px;
-            padding: 10px;
-            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .main-graphic {
-            width: 100%; /* コンテナいっぱいに表示 */
+        .image-container img {
             max-width: 100%;
+            width: 800px; /* 「ほどほどの大きさ」に設定 */
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: block;
+            border: 1px solid #eee;
         }
 
-        /* 解説カードセクション */
-        .info-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-top: 30px;
+            margin-bottom: 40px;
         }
 
-        .info-card {
-            padding: 15px;
-            border-left: 4px solid var(--accent-blue);
-            background: #f9f9f9;
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--secondary);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .card h2::before {
+            content: '●';
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .formula {
+            background: #f0f3f5;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .effect-list {
+            padding-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        .footer-note {
+            background: var(--primary);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .step-box {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .step {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
             font-size: 0.9rem;
         }
 
-        .info-card h3 {
-            margin-top: 0;
-            font-size: 1.1rem;
-            color: var(--accent-blue);
-        }
-
-        .download-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background-color: var(--accent-blue);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .download-btn:hover {
-            background-color: #2980b9;
-        }
-
-        @media (max-width: 1000px) {
-            .info-grid { grid-template-columns: repeat(2, 1fr); }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .image-container { padding: 10px; }
         }
     </style>
 </head>
 <body>
 
-<div class="dashboard-container">
+<div class="container">
     <header>
-        <h1>光学技術解説：レンズ選定の四大要素</h1>
-        <p>Industrial Lens Selection Fundamentals (f, F, Aperture, WD)</p>
+        <h1>レンズ選定の基礎：四大要素</h1>
+        <p>光学設計とマシンビジョンのための必須知識</p>
     </header>
 
-    <div class="image-viewer">
-        <img src="focus.png" alt="レンズ選定の基礎：四大要素解説図" class="main-graphic">
+    <div class="image-container">
+        <img src="focus.png" alt="レンズ選定の基礎：四大要素解説インフォグラフィック">
     </div>
 
-    <div class="info-grid">
-        <div class="info-card">
-            <h3>1. 焦点距離 (f)</h3>
-            <p>光学倍率と画角の要。センサーサイズとの組み合わせで「何がどの範囲で見えるか」が確定します。</p>
+    <div class="grid">
+        <div class="card">
+            <h2>焦点距離 (f)</h2>
+            <p>レンズの主点から焦点までの距離。写る範囲を決めます。</p>
+            <div class="formula">M = f / WD</div>
+            <ul class="effect-list">
+                <li><b>短い(広角):</b> 広く写る / 倍率が低い</li>
+                <li><b>長い(望遠):</b> 狭く写る / 倍率が高い</li>
+            </ul>
         </div>
-        <div class="info-card">
-            <h3>2. F値 (Brightness)</h3>
-            <p>光の取り込み能力。シャッタースピードやゲイン（ノイズ）に直結する、AI・画像処理の品質の鍵です。</p>
+
+        <div class="card">
+            <h2>F値 (F-number)</h2>
+            <p>レンズの明るさを示す指標。光の入り口の大きさを数値化。</p>
+            <div class="formula">F = f / D (有効口径)</div>
+            <ul class="effect-list">
+                <li><b>小さい:</b> 明るい / 被写界深度が浅い</li>
+                <li><b>大きい:</b> 暗い / 被写界深度が深い</li>
+            </ul>
         </div>
-        <div class="info-card">
-            <h3>3. 絞り (Iris)</h3>
-            <p>現場での「最終調整」。被写界深度を稼ぐために絞るのか、明るさを優先して開くのかを制御します。</p>
+
+        <div class="card" style="border-top-color: var(--accent);">
+            <h2>絞り (Aperture)</h2>
+            <p>物理的に光量を制限する機構。F値を制御するために使います。</p>
+            <div class="formula">光量・被写界深度の調整</div>
+            <ul class="effect-list">
+                <li><b>開く:</b> 高速シャッターが可能</li>
+                <li><b>絞る:</b> 全体にピントが合う（パンフォーカス）</li>
+                <li>※ 絞りすぎによる回折に注意</li>
+            </ul>
         </div>
-        <div class="info-card">
-            <h3>4. WD (Working Dist.)</h3>
-            <p>物理的制約。タクトタイムや機構干渉を防ぐため、まず最初に決めるべき「距離」です。</p>
+
+        <div class="card">
+            <h2>WD (Working Distance)</h2>
+            <p>レンズ先端から対象物（ワーク）までの作動距離。</p>
+            <div class="formula">物理的な設置スペース</div>
+            <ul class="effect-list">
+                <li><b>短い:</b> 倍率が上がる / 被写界深度が浅い</li>
+                <li><b>長い:</b> 倍率が下がる / 被写界深度が深い</li>
+                <li>※ 照明の配置スペース確保に重要</li>
+            </ul>
         </div>
     </div>
 
-    <div style="text-align: center;">
-        <a href="focus.png" download="focus.png" class="download-btn">この画像を保存する</a>
+    <div class="footer-note">
+        <h3>💡 実務での選定ステップ</h3>
+        <div class="step-box">
+            <div class="step">1. WDと画角（視野範囲）を決定</div>
+            <div class="step">2. 必要な焦点距離(f)を逆算</div>
+            <div class="step">3. 明るさと被写界深度(F値)を最適化</div>
+        </div>
     </div>
 </div>
 

@@ -817,25 +817,66 @@
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>光学技術ダッシュボード：レンズ選定とマウント</h1>
-        <p>設計精度を高めるフランジバックの理解と実務フロー</p>
+<div class="container" style="max-width: 1000px; margin: 0 auto; font-family: 'Noto Sans JP', sans-serif;">
+    <header style="text-align: center; margin-bottom: 50px;">
+        <h1 style="color: #0d4d4d; font-size: 32px; font-weight: 900; margin-bottom: 10px;">光学技術ダッシュボード：レンズ選定とマウント</h1>
+        <p style="color: #64748b; font-size: 18px;">設計精度を高めるフランジバックの理解と実務フロー</p>
     </header>
 
-<!-- 差し替え開始：フランジバック詳細 & 実務プロセス -->
-<div style="background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 40px;">
-    <div style="text-align: center;">
-        <h3 style="color: #0d4d4d; font-size: 24px; margin-bottom: 30px; position: relative; display: inline-block;">
-            光学技術解説：フランジバックの構造と規格
-            <span style="position: absolute; bottom: -10px; left: 0; width: 100%; height: 3px; background: #d4af37;"></span>
-        </h3>
-        <div style="cursor: pointer; overflow: hidden; border-radius: 12px; border: 1px solid #f1f5f9;" onclick="openModal('flange.png')">
-            <img src="flange.png" alt="フランジバックとバックフォーカスの構造比較" style="width: 100%; height: auto; display: block; transition: transform 0.3s ease;">
+    <!-- フランジバック詳細セクション -->
+    <div style="background: #fff; padding: 40px; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 40px;">
+        
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h3 style="color: #0d4d4d; font-size: 24px; margin-bottom: 10px; position: relative; display: inline-block;">
+                光学技術解説：フランジバックの構造と規格
+                <span style="position: absolute; bottom: -8px; left: 0; width: 100%; height: 3px; background: #d4af37;"></span>
+            </h3>
+            <p style="color: #64748b; font-size: 15px; margin-top: 15px;">レンズとカメラを正しくつなぐ「命綱」の距離について</p>
         </div>
-        <p style="text-align: center; font-size: 14px; color: #94a3b8; margin-top: 15px;">
-            <i class="fa-solid fa-magnifying-glass-plus" style="margin-right: 8px;"></i>図：マウント面（フランジ）からセンサー受光面までの規定距離（クリックで拡大）
-        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: start;">
+            
+            <!-- 左側：画像エリア -->
+            <div style="text-align: center;">
+                <div style="cursor: pointer; overflow: hidden; border-radius: 12px; border: 1px solid #f1f5f9; box-shadow: 0 10px 20px rgba(0,0,0,0.05);" onclick="openModal('flange.png')">
+                    <img src="flange.png" alt="フランジバックとバックフォーカスの構造比較" style="width: 100%; height: auto; display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='scale(1)';" >
+                </div>
+                <p style="font-size: 13px; color: #94a3b8; margin-top: 15px; line-height: 1.4;">
+                    <i class="fa-solid fa-magnifying-glass-plus" style="margin-right: 8px;"></i>
+                    <b>図：フランジバックの定義</b><br>マウント面（フランジ）からセンサー受光面までの規定距離
+                </p>
+            </div>
+
+            <!-- 右側：テキスト解説エリア -->
+            <div style="color: #334155; line-height: 1.8;">
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: #0d4d4d; margin: 0 0 10px 0; font-size: 18px; display: flex; align-items: center;">
+                        <span style="background: #0d4d4d; color: #fff; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px; font-size: 12px;">1</span>
+                        フランジバック (FB) とは？
+                    </h4>
+                    <p style="font-size: 14px; margin: 0;">
+                        カメラのレンズを取り付ける<b>「マウント面」から「センサー面」までの正確な距離</b>のことです。この距離が1μm（ミリの1000分の1）でもズレると、無限遠にピントが合わなくなるほど精密な世界です。
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: #0d4d4d; margin: 0 0 10px 0; font-size: 18px; display: flex; align-items: center;">
+                        <span style="background: #0d4d4d; color: #fff; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px; font-size: 12px;">2</span>
+                        バックフォーカス (BF) との違い
+                    </h4>
+                    <p style="font-size: 14px; margin: 0;">
+                        混同されやすいですが、<b>「レンズの最後尾」から「センサー面」まで</b>の距離を指します。レンズの形状によって変わるため、マウント規格で決まっているFBとは区別が必要です。
+                    </p>
+                </div>
+
+                <div style="background: #fff7ed; padding: 20px; border-radius: 12px; border-left: 4px solid #d4af37;">
+                    <h5 style="color: #9a3412; margin: 0 0 8px 0; font-size: 15px;">実務での重要ポイント</h5>
+                    <p style="font-size: 13px; color: #7c2d12; margin: 0;">
+                        Cマウント（17.526mm）やCSマウント（12.5mm）など、規格が異なるとピントが物理的に合いません。スペーサー（接写リング）を使って調整する場合も、このFBの数値を基準に計算します。
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -903,25 +944,7 @@
     </div>
 </div>
 
-<div class="footer-note" style="background: #0d4d4d; margin-top: 40px;">
-    <h2 style="margin-top: 0; color: #d4af37; font-size: 24px; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 15px; margin-bottom: 25px;">
-        🛠 選定・導入の実務プロセス
-    </h2>
-    <div class="step-list">
-        <div class="step-item">
-            <div style="color: #d4af37; font-weight: bold; margin-bottom: 8px;">STEP 1: 要件定義</div>
-            <p style="margin: 0; font-size: 13px; opacity: 0.9;">WD（設置距離）と画角（視野）を決定し、現場の物理的な設置スペースを確保する。</p>
-        </div>
-        <div class="step-item">
-            <div style="color: #d4af37; font-weight: bold; margin-bottom: 8px;">STEP 2: 光学逆算</div>
-            <p style="margin: 0; font-size: 13px; opacity: 0.9;">センサーサイズと画角から焦点距離(f)を計算し、最適なレンズ型番を選定する。</p>
-        </div>
-        <div class="step-item">
-            <div style="color: #d4af37; font-weight: bold; margin-bottom: 8px;">STEP 3: 整合性確認</div>
-            <p style="margin: 0; font-size: 13px; opacity: 0.9;">F値で深度を最適化。マウント規格の不一致があればスペーサー厚を0.01mm単位で検討する。</p>
-        </div>
-    </div>
-</div>
+
 
 </body>
 </html>

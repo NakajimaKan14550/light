@@ -553,7 +553,7 @@
 
         h1 { margin: 0; font-size: 2rem; }
 
-        /* メインビジュアル（生成画像） */
+        /* メインビジュアル */
         .main-visual {
             background: var(--white);
             padding: 20px;
@@ -572,7 +572,7 @@
         /* 詳細解説セクション */
         .detail-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 20px;
         }
 
@@ -582,12 +582,23 @@
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             border-top: 5px solid var(--accent-blue);
+            display: flex;
+            flex-direction: column;
         }
 
         .card h2 {
             font-size: 1.2rem;
             margin-top: 0;
             color: var(--primary-dark);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #eee;
+            background: #fff;
         }
 
         .table-standard {
@@ -607,31 +618,19 @@
             background: #fff3cd;
             border-left: 5px solid #ffc107;
             padding: 15px;
-            margin-top: 15px;
+            margin-top: auto;
             font-size: 0.9rem;
+            border-radius: 0 4px 4px 0;
         }
 
         .footer-note {
             margin-top: 40px;
             background: var(--primary-dark);
             color: var(--white);
-            padding: 30px;
+            padding: 20px;
             border-radius: 12px;
-        }
-
-        .step-list {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .step-item {
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 8px;
-            flex: 1;
-            min-width: 250px;
+            text-align: center;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -643,38 +642,65 @@
         <p>設計精度を高めるフランジバックの理解と実務フロー</p>
     </header>
 
+    <!-- メインビジュアル：フランジバック概略 -->
     <div class="main-visual">
-        <img src="flange.png" alt="レンズ選定の四大要素とフランジバック解説図">
-        <p style="color: #666; font-size: 0.85rem; margin-top: 10px;">※ 生成した focus.png をこの HTML と同じフォルダに保存してください。</p>
+        <img src="flange.png" alt="フランジバック：マウント基準面から撮像素子までの距離解説図">
+        <p style="color: #666; font-size: 0.85rem; margin-top: 10px;">
+            図：マウント面（フランジ）からセンサー受光面までの規定距離
+        </p>
     </div>
 
     <div class="detail-section">
+        <!-- カード 1：マウント規格と精度 -->
         <div class="card" style="border-top-color: var(--accent-orange);">
-            <h2>1. フランジバックの基礎知識</h2>
-            <p>マウント面からセンサーまでの固定距離。0.01mmの精度が無限遠ピントに影響します。</p>
+            <h2>1. マウント規格と工作精度</h2>
+            <p>マウント形状は規格ごとに厳格に定められています。特に無限遠ピントの整合にはミクロン単位の管理が求められます。</p>
+            
+            <img src="mount.png" alt="主要マウント規格の嵌合構造">
+
             <table class="table-standard">
-                <tr><th>規格</th><th>距離 (mm)</th></tr>
+                <tr><th>規格</th><th>フランジバック (mm)</th></tr>
                 <tr><td>Cマウント</td><td>17.526</td></tr>
                 <tr><td>CSマウント</td><td>12.526</td></tr>
                 <tr><td>Sony E</td><td>18.000</td></tr>
                 <tr><td>Nikon F</td><td>46.500</td></tr>
             </table>
+
+            <img src="0.01.png" alt="0.01mmの誤差が光路に与える影響">
+
             <div class="highlight-box">
                 <strong>💡 実務の鉄則：</strong><br>
-                CSカメラにCレンズを付ける際は <b>5mm接写リング</b> が必須です。
+                CSカメラにCレンズを装着する場合は <b>5mm接写リング（マウント変換アダプター）</b> が必要です。
             </div>
         </div>
 
+        <!-- カード 2：ミラーレス構造と設計の自由度 -->
         <div class="card">
-            <h2>2. バックフォーカスとの違い</h2>
-            <p>混同されやすいですが、以下の違いを区別することが設計ミスを防ぎます。</p>
-            <ul style="font-size: 0.95rem;">
-                <li><strong>フランジバック：</strong> カメラ側の「固定値」。規格で決まっている。</li>
-                <li><strong>バックフォーカス：</strong> レンズ最後尾ガラスからの「可変値」。設計で変わる。</li>
+            <h2>2. ミラーレス構造と設計進化</h2>
+            <p>デジタル化に伴い、ミラー（反射鏡）を排除した「ショートフランジバック」が主流となりました。</p>
+            
+            <img src="less.png" alt="ミラーレスカメラによるショートフランジバック構造">
+
+            <ul style="font-size: 0.95rem; padding-left: 20px;">
+                <li><strong>設計の自由度：</strong> センサーに近い位置までレンズを配置できるため、周辺光量の確保や小型化が容易になります。</li>
+                <li><strong>マウントアダプター：</strong> フランジバックが短いミラーレス機は、より長いフランジバックを持つ一眼レフ用レンズをアダプター経由で活用可能です。</li>
+                <li><strong>バックフォーカス：</strong> 最終レンズからセンサーまでの距離。物理的な干渉（シャッター等）を防ぐための重要指標です。</li>
             </ul>
+            
+            <div style="background: #eef6fc; padding: 15px; border-radius: 8px; font-size: 0.85rem; margin-top: auto;">
+                <strong>用語補足：</strong><br>
+                「フランジバック」はハードウェア（マウント）の固定値であり、「バックフォーカス」は光学設計上の可変値です。
+            </div>
         </div>
     </div>
 
+    <div class="footer-note">
+        光学設計におけるマウント整合性は、システム全体の解像性能を左右する最重要項目の一つです。
+    </div>
+</div>
+
+</body>
+</html>
     <div class="footer-note">
         <h2 style="margin-top: 0;">🛠 選定・導入プロセス</h2>
         <div class="step-list">

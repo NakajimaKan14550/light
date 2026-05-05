@@ -59,19 +59,49 @@
 </div>
       
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 50px;">
-            <div style="padding: 25px; background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; text-align: center;">
-                <div style="color: #d4af37; font-size: 20px; font-weight: bold; margin-bottom: 10px;">形状</div>
-                <p style="margin: 0; font-size: 14px; color: #64748b;">レンズが膨らむほど、光は強く曲げられ、焦点距離は短くなります。</p>
+      <!-- 差し替え箇所：形状・界面・制御のグリッドセクション -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 60px;">
+    
+    <!-- 形状 (Shape) -->
+    <div style="padding: 35px 25px; background: #fff; border-radius: 20px; border: 1px solid #e2e8f0; box-shadow: 0 10px 20px rgba(0,0,0,0.02); transition: transform 0.3s ease; border-top: 6px solid #d4af37;">
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 12px; margin-right: 15px;">
+                <i class="fa-solid fa-circle-dot" style="color: #d4af37; font-size: 20px;"></i>
             </div>
-            <div style="padding: 25px; background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; text-align: center;">
-                <div style="color: #d4af37; font-size: 20px; font-weight: bold; margin-bottom: 10px;">界面</div>
-                <p style="margin: 0; font-size: 14px; color: #64748b;">異なる屈折率を持つ2つの液体界面が、ガラスレンズの表面と同じ役割を果たします。</p>
+            <h4 style="margin: 0; color: #0d4d4d; font-size: 20px; font-weight: 700;">形状 (Curvature)</h4>
+        </div>
+        <p style="margin: 0; font-size: 15px; color: #475569; line-height: 1.8;">
+            レンズの膨らみ（曲率）が強いほど光の屈折角が大きくなり、<strong>焦点距離は短く</strong>なります。液体レンズは物理的な厚みを変えるのではなく、表面張力を利用して「界面のカーブ」そのものを瞬時に変形させます。
+        </p>
+    </div>
+
+    <!-- 界面 (Interface) -->
+    <div style="padding: 35px 25px; background: #fff; border-radius: 20px; border: 1px solid #e2e8f0; box-shadow: 0 10px 20px rgba(0,0,0,0.02); transition: transform 0.3s ease; border-top: 6px solid #0d4d4d;">
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="background: rgba(13, 77, 77, 0.1); padding: 10px; border-radius: 12px; margin-right: 15px;">
+                <i class="fa-solid fa-droplet" style="color: #0d4d4d; font-size: 20px;"></i>
             </div>
-            <div style="padding: 25px; background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; text-align: center;">
-                <div style="color: #d4af37; font-size: 20px; font-weight: bold; margin-bottom: 10px;">制御</div>
-                <p style="margin: 0; font-size: 14px; color: #64748b;">この「界面のカーブ」を電気的に制御するのがエレクトロウェッティング技術です。</p>
+            <h4 style="margin: 0; color: #0d4d4d; font-size: 20px; font-weight: 700;">界面 (Interface)</h4>
+        </div>
+        <p style="margin: 0; font-size: 15px; color: #475569; line-height: 1.8;">
+            「水（導電性）」と「油（絶縁性）」という<strong>混ざり合わない2つの液体</strong>の境界が、ガラスレンズの表面と同じ役割を果たします。異なる屈折率を持つ液体の境界を通ることで、光は正確に制御されます。
+        </p>
+    </div>
+
+    <!-- 制御 (Electrowetting) -->
+    <div style="padding: 35px 25px; background: #fff; border-radius: 20px; border: 1px solid #e2e8f0; box-shadow: 0 10px 20px rgba(0,0,0,0.02); transition: transform 0.3s ease; border-top: 6px solid #d4af37;">
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 12px; margin-right: 15px;">
+                <i class="fa-solid fa-bolt" style="color: #d4af37; font-size: 20px;"></i>
             </div>
+            <h4 style="margin: 0; color: #0d4d4d; font-size: 20px; font-weight: 700;">制御 (Voltage)</h4>
+        </div>
+        <p style="margin: 0; font-size: 15px; color: #475569; line-height: 1.8;">
+            電圧を加えると液体の濡れ性が変化し、界面の形状が動きます（<strong>エレクトロウェッティング技術</strong>）。モーター駆動のような「移動量」の概念がなく、デジタルな電圧制御のみでピント位置を確定させます。
+        </p>
+    </div>
+
+</div>
         </div>
     </div>
 </section>

@@ -642,63 +642,89 @@
         <p>設計精度を高めるフランジバックの理解と実務フロー</p>
     </header>
 
-    <!-- メインビジュアル：フランジバック概略 -->
-    <div class="main-visual">
-        <img src="flange.png" alt="フランジバック：マウント基準面から撮像素子までの距離解説図">
-        <p style="color: #666; font-size: 0.85rem; margin-top: 10px;">
-            図：マウント面（フランジ）からセンサー受光面までの規定距離
+<!-- 差し替え開始：フランジバック詳細 & 実務プロセス -->
+<div style="background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 40px;">
+    <div style="text-align: center;">
+        <h3 style="color: #0d4d4d; font-size: 24px; margin-bottom: 30px; position: relative; display: inline-block;">
+            光学技術解説：フランジバックの構造と規格
+            <span style="position: absolute; bottom: -10px; left: 0; width: 100%; height: 3px; background: #d4af37;"></span>
+        </h3>
+        <div style="cursor: pointer; overflow: hidden; border-radius: 12px; border: 1px solid #f1f5f9;" onclick="openModal('flange.png')">
+            <img src="flange.png" alt="フランジバックとバックフォーカスの構造比較" style="width: 100%; height: auto; display: block; transition: transform 0.3s ease;">
+        </div>
+        <p style="text-align: center; font-size: 14px; color: #94a3b8; margin-top: 15px;">
+            <i class="fa-solid fa-magnifying-glass-plus" style="margin-right: 8px;"></i>図：マウント面（フランジ）からセンサー受光面までの規定距離（クリックで拡大）
         </p>
-    </div>
-
-    <div class="detail-section">
-        <!-- カード 1：マウント規格と精度 -->
-        <div class="card" style="border-top-color: var(--accent-orange);">
-            <h2>1. マウント規格と工作精度</h2>
-            <p>マウント形状は規格ごとに厳格に定められています。特に無限遠ピントの整合にはミクロン単位の管理が求められます。</p>
-            
-            <img src="mount.png" alt="主要マウント規格の嵌合構造">
-
-            <table class="table-standard">
-                <tr><th>規格</th><th>フランジバック (mm)</th></tr>
-                <tr><td>Cマウント</td><td>17.526</td></tr>
-                <tr><td>CSマウント</td><td>12.526</td></tr>
-                <tr><td>Sony E</td><td>18.000</td></tr>
-                <tr><td>Nikon F</td><td>46.500</td></tr>
-            </table>
-
-            <img src="0.01.png" alt="0.01mmの誤差が光路に与える影響">
-
-            <div class="highlight-box">
-                <strong>💡 実務の鉄則：</strong><br>
-                CSカメラにCレンズを装着する場合は <b>5mm接写リング（マウント変換アダプター）</b> が必要です。
-            </div>
-        </div>
-
-        <!-- カード 2：ミラーレス構造と設計の自由度 -->
-        <div class="card">
-            <h2>2. ミラーレス構造と設計進化</h2>
-            <p>デジタル化に伴い、ミラー（反射鏡）を排除した「ショートフランジバック」が主流となりました。</p>
-            
-            <img src="less.png" alt="ミラーレスカメラによるショートフランジバック構造">
-
-            <ul style="font-size: 0.95rem; padding-left: 20px;">
-                <li><strong>設計の自由度：</strong> センサーに近い位置までレンズを配置できるため、周辺光量の確保や小型化が容易になります。</li>
-                <li><strong>マウントアダプター：</strong> フランジバックが短いミラーレス機は、より長いフランジバックを持つ一眼レフ用レンズをアダプター経由で活用可能です。</li>
-                <li><strong>バックフォーカス：</strong> 最終レンズからセンサーまでの距離。物理的な干渉（シャッター等）を防ぐための重要指標です。</li>
-            </ul>
-            
-            <div style="background: #eef6fc; padding: 15px; border-radius: 8px; font-size: 0.85rem; margin-top: auto;">
-                <strong>用語補足：</strong><br>
-                「フランジバック」はハードウェア（マウント）の固定値であり、「バックフォーカス」は光学設計上の可変値です。
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-note">
-        光学設計におけるマウント整合性は、システム全体の解像性能を左右する最重要項目の一つです。
     </div>
 </div>
 
+<div class="detail-section">
+    <!-- 1. マウント規格と工作精度 -->
+    <div class="card" style="border-top-color: #d4af37;">
+        <h2 style="display: flex; align-items: center;">
+            <span style="background: #d4af37; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 12px;">1</span>
+            マウント規格と工作精度
+        </h2>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 20px;">
+            マウント形状は規格ごとに厳格に定められています。特に無限遠ピントの整合には<strong>ミクロン単位の管理</strong>が求められます。
+        </p>
+        
+        <table class="table-standard">
+            <thead>
+                <tr style="background: #f8fafc;"><th>規格</th><th>距離 (mm)</th><th>カメラタイプ</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Cマウント</td><td>17.526</td><td>産業用・16mm</td></tr>
+                <tr><td>CSマウント</td><td>12.526</td><td>防犯・小型産業用</td></tr>
+                <tr><td>Sony E</td><td>18.000</td><td>ミラーレス</td></tr>
+                <tr><td>Nikon F</td><td>46.500</td><td>一眼レフ</td></tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box" style="background: #fff9db; border-color: #fab005;">
+            <strong style="color: #856404;">⚠️ 実務の鉄則：</strong><br>
+            CSカメラにCレンズを装着する場合は <strong>5mm接写リング</strong>（マウント変換アダプター）が必須です。
+        </div>
+    </div>
+
+    <!-- 2. ミラーレス構造と設計進化 -->
+    <div class="card" style="border-top-color: #0d4d4d;">
+        <h2 style="display: flex; align-items: center;">
+            <span style="background: #0d4d4d; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 12px;">2</span>
+            ミラーレス構造と設計進化
+        </h2>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 20px;">
+            デジタル化に伴い、ミラー（反射鏡）を排除した「ショートフランジバック」が主流となり、設計の自由度が飛躍的に向上しました。
+        </p>
+        
+        <ul style="font-size: 14px; color: #475569; padding-left: 20px; line-height: 1.8;">
+            <li style="margin-bottom: 10px;"><strong>設計の自由度：</strong> センサーに近い位置までレンズを配置できるため、周辺光量の確保や小型化が容易になります。</li>
+            <li style="margin-bottom: 10px;"><strong>マウントアダプター：</strong> フランジバックが短いミラーレス機は、より長い距離を持つ一眼レフ用レンズをアダプター経由で活用可能です。</li>
+            <li><strong>バックフォーカス：</strong> 最終レンズからセンサーまでの距離。物理的な干渉（シャッター等）を防ぐための重要指標です。</li>
+        </ul>
+    </div>
+</div>
+
+<div class="footer-note" style="background: #0d4d4d; margin-top: 40px;">
+    <h2 style="margin-top: 0; color: #d4af37; font-size: 24px; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 15px; margin-bottom: 25px;">
+        🛠 選定・導入の実務プロセス
+    </h2>
+    <div class="step-list">
+        <div class="step-item">
+            <div style="color: #d4af37; font-weight: bold; margin-bottom: 8px;">STEP 1: 要件定義</div>
+            <p style="margin: 0; font-size: 13px; opacity: 0.9;">WD（設置距離）と画角（視野）を決定し、現場の物理的な設置スペースを確保する。</p>
+        </div>
+        <div class="step-item">
+            <div style="color: #d4af37; font-weight: bold; margin-bottom: 8px;">STEP 2: 光学逆算</div>
+            <p style="margin: 0; font-size: 13px; opacity: 0.9;">センサーサイズと画角から焦点距離(f)を計算し、最適なレンズ型番を選定する。</p>
+        </div>
+        <div class="step-item">
+            <div style="color: #d4af37; font-weight: bold; margin-bottom: 8px;">STEP 3: 整合性確認</div>
+            <p style="margin: 0; font-size: 13px; opacity: 0.9;">F値で深度を最適化。マウント規格の不一致があればスペーサー厚を0.01mm単位で検討する。</p>
+        </div>
+    </div>
+</div>
+<!-- 差し替え終了 -->
 </body>
 </html>
     <div class="footer-note">

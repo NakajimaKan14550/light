@@ -665,25 +665,30 @@
             <span style="background: #d4af37; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 12px;">1</span>
             マウント規格と工作精度
         </h2>
-        <p style="font-size: 15px; color: #475569; margin-bottom: 20px;">
-            マウント形状は規格ごとに厳格に定められています。特に無限遠ピントの整合には<strong>ミクロン単位の管理</strong>が求められます。
+        <p style="font-size: 15px; color: #475569; margin-bottom: 15px;">
+            マウント形状は規格ごとに厳密に定められています。特に無限遠ピントの整合には<strong>ミクロン単位の管理</strong>が求められます。
         </p>
         
+        <!-- 追加画像：0.01.png -->
+        <div style="margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #edf2f7;">
+            <img src="0.01.png" alt="0.01mmの誤差が光路に与える影響" style="width: 100%; height: auto; display: block;">
+        </div>
+
         <table class="table-standard">
             <thead>
-                <tr style="background: #f8fafc;"><th>規格</th><th>距離 (mm)</th><th>カメラタイプ</th></tr>
+                <tr style="background: #f8fafc;"><th>規格</th><th>距離 (mm)</th><th>主な用途</th></tr>
             </thead>
             <tbody>
-                <tr><td>Cマウント</td><td>17.526</td><td>産業用・16mm</td></tr>
-                <tr><td>CSマウント</td><td>12.526</td><td>防犯・小型産業用</td></tr>
+                <tr><td>Cマウント</td><td>17.526</td><td>産業用カメラ</td></tr>
+                <tr><td>CSマウント</td><td>12.526</td><td>防犯カメラ等</td></tr>
                 <tr><td>Sony E</td><td>18.000</td><td>ミラーレス</td></tr>
                 <tr><td>Nikon F</td><td>46.500</td><td>一眼レフ</td></tr>
             </tbody>
         </table>
 
-        <div class="highlight-box" style="background: #fff9db; border-color: #fab005;">
+        <div class="highlight-box" style="background: #fff9db; border-color: #fab005; margin-top: 20px;">
             <strong style="color: #856404;">⚠️ 実務の鉄則：</strong><br>
-            CSカメラにCレンズを装着する場合は <strong>5mm接写リング</strong>（マウント変換アダプター）が必須です。
+            CSカメラにCレンズを装着する場合は <strong>5mm接写リング</strong> が必須です。
         </div>
     </div>
 
@@ -693,10 +698,22 @@
             <span style="background: #0d4d4d; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 12px;">2</span>
             ミラーレス構造と設計進化
         </h2>
-        <p style="font-size: 15px; color: #475569; margin-bottom: 20px;">
-            デジタル化に伴い、ミラー（反射鏡）を排除した「ショートフランジバック」が主流となり、設計の自由度が飛躍的に向上しました。
+        <p style="font-size: 15px; color: #475569; margin-bottom: 15px;">
+            デジタル化に伴い、ミラー（反射鏡）を排除した「ショートフランジバック」が主流となり、設計の自由度が向上しました。
         </p>
+
+        <!-- 追加画像：less.png -->
+        <div style="margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #edf2f7;">
+            <img src="less.png" alt="ミラーレス構造によるショートフランジバック" style="width: 100%; height: auto; display: block;">
+        </div>
         
+        <ul style="font-size: 14px; color: #475569; padding-left: 20px; line-height: 1.8;">
+            <li style="margin-bottom: 10px;"><strong>設計の自由度：</strong> センサーに近い位置までレンズを配置でき、周辺光量の確保が容易。</li>
+            <li style="margin-bottom: 10px;"><strong>マウントアダプター：</strong> 長いフランジバックを持つ一眼レフ用レンズをアダプター経由で活用可能。</li>
+            <li><strong>バックフォーカス：</strong> 最終レンズからセンサーまでの距離。物理的な干渉を防ぐ重要指標。</li>
+        </ul>
+    </div>
+</div>
         <ul style="font-size: 14px; color: #475569; padding-left: 20px; line-height: 1.8;">
             <li style="margin-bottom: 10px;"><strong>設計の自由度：</strong> センサーに近い位置までレンズを配置できるため、周辺光量の確保や小型化が容易になります。</li>
             <li style="margin-bottom: 10px;"><strong>マウントアダプター：</strong> フランジバックが短いミラーレス機は、より長い距離を持つ一眼レフ用レンズをアダプター経由で活用可能です。</li>

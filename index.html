@@ -703,12 +703,13 @@
     <title>光学技術解説：レンズ選定とマウント規格</title>
     <style>
         :root {
-            --primary-dark: #2c3e50;
-            --accent-blue: #3498db;
-            --accent-orange: #e67e22;
-            --bg-light: #f4f7f6;
+            --primary-dark: #1e293b;
+            --accent-gold: #d4af37;
+            --accent-blue: #0ea5e9;
+            --accent-orange: #ea580c;
+            --bg-light: #f8fafc;
             --white: #ffffff;
-            --border-color: #dcdde1;
+            --border-color: #e2e8f0;
         }
 
         body {
@@ -721,286 +722,227 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
             padding-bottom: 20px;
-            margin-bottom: 30px;
-            border-bottom: 3px solid var(--primary-dark);
-        }
-
-        h1 { margin: 0; font-size: 2rem; }
-
-        /* メインビジュアル */
-        .main-visual {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
             margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary-dark);
         }
 
-        .main-visual img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
+        h1 { margin: 0; font-size: 1.8rem; font-weight: 800; letter-spacing: 0.05em; }
+        .sub-header { color: #64748b; font-size: 1rem; margin-top: 5px; }
+
+        /* 画像拡大用の共通スタイル */
+        .zoom-link {
+            display: block;
+            position: relative;
+            cursor: zoom-in;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            transition: transform 0.2s ease;
+        }
+        .zoom-link:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .zoom-link img { width: 100%; height: auto; display: block; }
+        
+        .zoom-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(30, 41, 59, 0.7);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            backdrop-filter: blur(4px);
         }
 
-        /* 詳細解説セクション */
-        .detail-section {
+        /* メインセクション：フランジバック */
+        .fb-main-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            color: #0d4d4d;
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+
+        .section-title span {
+            border-bottom: 3px solid var(--accent-gold);
+            padding-bottom: 5px;
+        }
+
+        .fb-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) { .fb-grid { grid-template-columns: 1fr; } }
+
+        /* 詳細カード */
+        .detail-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
 
         .card {
             background: var(--white);
             padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--accent-blue);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             display: flex;
             flex-direction: column;
         }
 
         .card h2 {
-            font-size: 1.2rem;
-            margin-top: 0;
-            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
         }
 
-        .card img {
-            width: 100%;
-            height: auto;
-            border-radius: 6px;
-            margin: 15px 0;
-            border: 1px solid #eee;
-            background: #fff;
+        .badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #fff;
+            margin-right: 10px;
+            flex-shrink: 0;
         }
 
+        /* テーブル */
         .table-standard {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin: 15px 0;
+            font-size: 0.85rem;
         }
-
+        .table-standard th { background: #f1f5f9; font-weight: 700; }
         .table-standard th, .table-standard td {
-            text-align: left;
-            padding: 8px;
+            padding: 10px;
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            text-align: left;
         }
 
-        .highlight-box {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
+        .info-box {
+            background: #fff9db;
+            border-left: 4px solid #fab005;
             padding: 15px;
-            margin-top: auto;
+            border-radius: 0 8px 8px 0;
             font-size: 0.9rem;
-            border-radius: 0 4px 4px 0;
+            margin-top: auto;
         }
 
-        .footer-note {
-            margin-top: 40px;
-            background: var(--primary-dark);
-            color: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
     </style>
 </head>
 <body>
 
+<div class="container">
+    <header>
+        <h1>光学技術ダッシュボード：レンズ選定とマウント</h1>
+        <p class="sub-header">設計精度を高めるフランジバックの理解と実務フロー</p>
     </header>
 
-    <!-- フランジバック詳細セクション -->
-   <div class="container" style="max-width: 1000px; margin: 0 auto; font-family: 'Helvetica Neue', Arial, sans-serif;">
-    
-    <!-- ヘッダー -->
-    <header style="text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #334155;">
-        <h1 style="color: #1e293b; font-size: 28px; font-weight: 800; margin-bottom: 8px;">光学技術ダッシュボード：レンズ選定とマウント</h1>
-        <p style="color: #64748b; font-size: 15px;">設計精度を高めるフランジバックの理解と実務フロー</p>
-    </header>
-
-    <!-- メインコンテンツ -->
-    <div style="background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
+    <!-- フランジバック解説：メイン -->
+    <section class="fb-main-card">
+        <h2 class="section-title"><span>光学技術解説：フランジバックの構造と規格</span></h2>
         
-  <div class="container" style="max-width: 1000px; margin: 0 auto; font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;">
-    
-    <!-- ヘッダー -->
-    <header style="text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #334155;">
-        <h1 style="color: #1e293b; font-size: 28px; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 8px;">光学技術ダッシュボード：レンズ選定とマウント</h1>
-        <p style="color: #64748b; font-size: 15px;">設計精度を高めるフランジバックの理解と実務フロー</p>
-    </header>
+        <div class="fb-grid">
+            <!-- 図解エリア -->
+            <div>
+                <a href="flange.png" target="_blank" class="zoom-link">
+                    <img src="flange.png" alt="フランジバックとバックフォーカス">
+                    <span class="zoom-icon">クリックで拡大</span>
+                </a>
+                <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 10px;">
+                    図：カメラ規格による固定距離(FB)と設計可変距離(BF)
+                </p>
+            </div>
 
-    <!-- フランジバック解説メインコンテンツ -->
-    <div style="background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
+            <!-- 解説テキスト -->
+            <div style="font-size: 14px; color: #334155;">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: var(--accent-orange); margin-bottom: 8px;">A. フランジバック (FB)</h4>
+                    <p style="margin: 0;"><b>カメラ側の基準</b>。マウント面からセンサーまでの距離。これがズレると無限遠にピントが合いません。</p>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: var(--accent-blue); margin-bottom: 8px;">B. バックフォーカス (BF)</h4>
+                    <p style="margin: 0;"><b>レンズ側の設計</b>。レンズ最後尾からセンサーまでの距離。物理的な干渉を防ぐための指標です。</p>
+                </div>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <p style="margin: 0; font-size: 13px; font-weight: 700;">📌 実務：</p>
+                    <p style="margin: 5px 0 0 0; font-size: 13px;">異なるマウントを繋ぐ際は、FBの差分をアダプターや接写リングで正確に埋める必要があります。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 詳細グリッドセクション -->
+    <div class="detail-grid">
         
-        <div style="text-align: center; margin-bottom: 35px;">
-            <h2 style="color: #0d4d4d; font-size: 22px; font-weight: 700; position: relative; display: inline-block; padding-bottom: 8px;">
-                光学技術解説：フランジバックの構造と規格
-                <span style="position: absolute; bottom: 0; left: 15%; width: 70%; height: 3px; background: #d4af37;"></span>
-            </h2>
-        </div>
-
-        <!-- 画像表示エリア -->
-        <div style="margin-bottom: 40px; border-radius: 8px; overflow: hidden; border: 1px solid #f1f5f9;">
-            <img src="flange.png" alt="フランジバックとバックフォーカスの位置関係図" style="width: 100%; height: auto; display: block;">
-        </div>
-
-        <!-- テキスト解説エリア（2カラム構成） -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+        <!-- カード 1 -->
+        <article class="card" style="border-top: 5px solid var(--accent-gold);">
+            <h2><span class="badge" style="background: var(--accent-gold);">1</span>マウント規格と工作精度</h2>
+            <p style="font-size: 14px; margin: 0;">無限遠ピントの整合にはミクロン単位の管理が求められます。</p>
             
-            <!-- 左カラム：フランジバック（オレンジ側の解説） -->
-            <div style="background: #fffaf5; padding: 25px; border-radius: 10px; border: 1px solid #ffedd5;">
-                <h3 style="color: #c2410c; font-size: 18px; margin-top: 0; display: flex; align-items: center;">
-                    <span style="background: #ea580c; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px; font-size: 12px;">A</span>
-                    フランジバック（カメラ側の基準）
-                </h3>
-                <p style="font-size: 14px; color: #431407; line-height: 1.7;">
-                    <b>カメラマウント面からセンサー面までの固定距離</b>です。規格（Cマウント、Fマウントなど）によって厳密に決まっており、この距離が合わないと無限遠（遠くのもの）にピントが絶対に合いません。
-                </p>
-            </div>
+            <a href="0.01.png" target="_blank" class="zoom-link" style="margin: 15px 0;">
+                <img src="0.01.png" alt="0.01mmの誤差">
+                <span class="zoom-icon">拡大表示</span>
+            </a>
 
-            <!-- 右カラム：バックフォーカス（青色側の解説） -->
-            <div style="background: #f0f9ff; padding: 25px; border-radius: 10px; border: 1px solid #e0f2fe;">
-                <h3 style="color: #0369a1; font-size: 18px; margin-top: 0; display: flex; align-items: center;">
-                    <span style="background: #0ea5e9; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px; font-size: 12px;">B</span>
-                    バックフォーカス（レンズ側の設計）
-                </h3>
-                <p style="font-size: 14px; color: #0c4a6e; line-height: 1.7;">
-                    <b>レンズの最後尾ガラス面からセンサー面までの距離</b>です。レンズの設計（ピント合わせ）によって長さが変化します。実務上は、レンズの後ろがセンサーにぶつからないか確認する際に重要となります。
-                </p>
-            </div>
-        </div>
-
-        <!-- まとめセクション -->
-        <div style="margin-top: 30px; background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 5px solid #1e293b;">
-            <p style="margin: 0; font-size: 14px; font-weight: 700; color: #1e293b;">💡 実務上のポイント：</p>
-            <p style="margin: 5px 0 0 0; font-size: 13px; color: #475569;">
-                マウント変換アダプターや接写リングを使用する際は、この「フランジバック」の差分を埋めることでピント位置を調整します。カメラボディを変える際は必ずこの規格の一致を確認してください。
-            </p>
-        </div>
-    </div>
-</div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: start;">
+            <table class="table-standard">
+                <thead><tr><th>規格</th><th>距離(mm)</th><th>用途</th></tr></thead>
+                <tbody>
+                    <tr><td>Cマウント</td><td>17.526</td><td>産業用</td></tr>
+                    <tr><td>CSマウント</td><td>12.526</td><td>防犯用</td></tr>
+                    <tr><td>Sony E</td><td>18.000</td><td>ミラーレス</td></tr>
+                </tbody>
+            </table>
             
-            <!-- 左側：画像エリア -->
-            <div style="text-align: center;">
-                <div style="cursor: pointer; overflow: hidden; border-radius: 12px; border: 1px solid #f1f5f9; box-shadow: 0 10px 20px rgba(0,0,0,0.05);" onclick="openModal('flange.png')">
-                    <img src="flange.png" alt="フランジバックとバックフォーカスの構造比較" style="width: 100%; height: auto; display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='scale(1)';" >
-                </div>
-                <p style="font-size: 13px; color: #94a3b8; margin-top: 15px; line-height: 1.4;">
-                    <i class="fa-solid fa-magnifying-glass-plus" style="margin-right: 8px;"></i>
-                    <b>図：フランジバックの定義</b><br>マウント面（フランジ）からセンサー受光面までの規定距離
-                </p>
+            <div class="info-box">
+                <b>⚠️ 鉄則：</b><br>CSカメラにCレンズを付ける際は「5mmリング」が必須。
             </div>
+        </article>
 
-            <!-- 右側：テキスト解説エリア -->
-            <div style="color: #334155; line-height: 1.8;">
-                <div style="margin-bottom: 25px;">
-                    <h4 style="color: #0d4d4d; margin: 0 0 10px 0; font-size: 18px; display: flex; align-items: center;">
-                        <span style="background: #0d4d4d; color: #fff; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px; font-size: 12px;">1</span>
-                        フランジバック (FB) とは？
-                    </h4>
-                    <p style="font-size: 14px; margin: 0;">
-                        カメラのレンズを取り付ける<b>「マウント面」から「センサー面」までの正確な距離</b>のことです。この距離が1μm（ミリの1000分の1）でもズレると、無限遠にピントが合わなくなるほど精密な世界です。
-                    </p>
-                </div>
+        <!-- カード 2 -->
+        <article class="card" style="border-top: 5px solid #0d4d4d;">
+            <h2><span class="badge" style="background: #0d4d4d;">2</span>ミラーレス構造と設計進化</h2>
+            <p style="font-size: 14px; margin: 0;">ショートフランジバックにより、レンズ設計の自由度が大幅に向上しました。</p>
 
-                <div style="margin-bottom: 25px;">
-                    <h4 style="color: #0d4d4d; margin: 0 0 10px 0; font-size: 18px; display: flex; align-items: center;">
-                        <span style="background: #0d4d4d; color: #fff; width: 24px; height: 24px; border-radius: 4px; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px; font-size: 12px;">2</span>
-                        バックフォーカス (BF) との違い
-                    </h4>
-                    <p style="font-size: 14px; margin: 0;">
-                        混同されやすいですが、<b>「レンズの最後尾」から「センサー面」まで</b>の距離を指します。レンズの形状によって変わるため、マウント規格で決まっているFBとは区別が必要です。
-                    </p>
-                </div>
+            <a href="less.png" target="_blank" class="zoom-link" style="margin: 15px 0;">
+                <img src="less.png" alt="ミラーレス構造">
+                <span class="zoom-icon">拡大表示</span>
+            </a>
 
-                <div style="background: #fff7ed; padding: 20px; border-radius: 12px; border-left: 4px solid #d4af37;">
-                    <h5 style="color: #9a3412; margin: 0 0 8px 0; font-size: 15px;">実務での重要ポイント</h5>
-                    <p style="font-size: 13px; color: #7c2d12; margin: 0;">
-                        Cマウント（17.526mm）やCSマウント（12.5mm）など、規格が異なるとピントが物理的に合いません。スペーサー（接写リング）を使って調整する場合も、このFBの数値を基準に計算します。
-                    </p>
-                </div>
-            </div>
-        </div>
+            <ul style="font-size: 13px; padding-left: 18px; margin: 0;">
+                <li><b>自由度：</b>センサー近くまでレンズを配置可能。</li>
+                <li><b>小型化：</b>ミラー室を排除し、ボディを薄型化。</li>
+                <li><b>拡張性：</b>アダプターを介して旧型レンズを活用可能。</li>
+            </ul>
+        </article>
+
     </div>
 </div>
-
-<div class="detail-section">
-    <!-- 1. マウント規格と工作精度 -->
-    <div class="card" style="border-top-color: #d4af37;">
-        <h2 style="display: flex; align-items: center;">
-            <span style="background: #d4af37; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 12px;">1</span>
-            マウント規格と工作精度
-        </h2>
-        <p style="font-size: 15px; color: #475569; margin-bottom: 15px;">
-            マウント形状は規格ごとに厳密に定められています。特に無限遠ピントの整合には<strong>ミクロン単位の管理</strong>が求められます。
-        </p>
-        
-        <!-- 追加画像：0.01.png -->
-        <div style="margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #edf2f7;">
-            <img src="0.01.png" alt="0.01mmの誤差が光路に与える影響" style="width: 100%; height: auto; display: block;">
-        </div>
-
-        <table class="table-standard">
-            <thead>
-                <tr style="background: #f8fafc;"><th>規格</th><th>距離 (mm)</th><th>主な用途</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Cマウント</td><td>17.526</td><td>産業用カメラ</td></tr>
-                <tr><td>CSマウント</td><td>12.526</td><td>防犯カメラ等</td></tr>
-                <tr><td>Sony E</td><td>18.000</td><td>ミラーレス</td></tr>
-                <tr><td>Nikon F</td><td>46.500</td><td>一眼レフ</td></tr>
-            </tbody>
-        </table>
-
-        <div class="highlight-box" style="background: #fff9db; border-color: #fab005; margin-top: 20px;">
-            <strong style="color: #856404;">⚠️ 実務の鉄則：</strong><br>
-            CSカメラにCレンズを装着する場合は <strong>5mm接写リング</strong> が必須です。
-        </div>
-    </div>
-
-    <!-- 2. ミラーレス構造と設計進化 -->
-    <div class="card" style="border-top-color: #0d4d4d;">
-        <h2 style="display: flex; align-items: center;">
-            <span style="background: #0d4d4d; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 12px;">2</span>
-            ミラーレス構造と設計進化
-        </h2>
-        <p style="font-size: 15px; color: #475569; margin-bottom: 15px;">
-            デジタル化に伴い、ミラー（反射鏡）を排除した「ショートフランジバック」が主流となり、設計の自由度が向上しました。
-        </p>
-
-        <!-- 追加画像：less.png -->
-        <div style="margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #edf2f7;">
-            <img src="less.png" alt="ミラーレス構造によるショートフランジバック" style="width: 100%; height: auto; display: block;">
-        </div>
-        
-        <ul style="font-size: 14px; color: #475569; padding-left: 20px; line-height: 1.8;">
-            <li style="margin-bottom: 10px;"><strong>設計の自由度：</strong> センサーに近い位置までレンズを配置でき、周辺光量の確保が容易。</li>
-            <li style="margin-bottom: 10px;"><strong>マウントアダプター：</strong> 長いフランジバックを持つ一眼レフ用レンズをアダプター経由で活用可能。</li>
-            <li><strong>バックフォーカス：</strong> 最終レンズからセンサーまでの距離。物理的な干渉を防ぐ重要指標。</li>
-        </ul>
-    </div>
-</div>
-        <ul style="font-size: 14px; color: #475569; padding-left: 20px; line-height: 1.8;">
-            <li style="margin-bottom: 10px;"><strong>設計の自由度：</strong> センサーに近い位置までレンズを配置できるため、周辺光量の確保や小型化が容易になります。</li>
-            <li style="margin-bottom: 10px;"><strong>マウントアダプター：</strong> フランジバックが短いミラーレス機は、より長い距離を持つ一眼レフ用レンズをアダプター経由で活用可能です。</li>
-            <li><strong>バックフォーカス：</strong> 最終レンズからセンサーまでの距離。物理的な干渉（シャッター等）を防ぐための重要指標です。</li>
-        </ul>
-    </div>
-</div>
-
-
 
 </body>
 </html>
